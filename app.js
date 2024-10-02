@@ -10,7 +10,15 @@ const opponentOptionPreview = document.createElement("p");
 const container = document.querySelector(".container");
 const result = document.querySelector(".result");
 const opponentMessage = document.createElement("p");
+const opponentSection = document.querySelector(".opponent");
+const playerSection = document.querySelector(".player");
+const resetButton = document.querySelector(".reset");
+const confirmButton = document.querySelector(".confirm")
 
+opponentSection.style.display = "none";
+
+opponentMessage.style.fontStyle = "italic";
+opponentMessage.style.color = "gray"
 playerOptionPreview.style.fontSize = "2rem";
 opponentOptionPreview.style.fontSize = "4rem";
 
@@ -39,14 +47,19 @@ const getOptionEmoji = option => {
 const getRandomOption = arr => OPTIONS[Math.floor(Math.random() * arr.length)];
 
 const makeComputerMove = function() {
+    if (playerOption === undefined)
+    {
+        return;
+    }
     opponentOption = getRandomOption(OPTIONS);
     opponentMessage.textContent = "The opponent has picked"
     opponentOptionPreview.textContent = getOptionEmoji(opponentOption);
+    opponentSection.style.display = "flex";
 }
 
 const determineWinner = (plOption, opOption) => {
     
-    if (plOption === undefined || opOption === undefined)
+    if (plOption === undefined)
     {
         return;
     }
@@ -121,7 +134,20 @@ const displayResult = winner => {
         result.classList.add("tie");
         result.textContent = `It's a tie! Both of you have selected ${playerOption}`;
     }
-} 
+}
+
+const resetGame = function () {
+    playerOption = undefined;
+    opponentOption = undefined;
+    opponentSection.style.display = "none";
+    result.classList.remove("error", "win", "loss", "tie");
+    result.textContent = "";
+    playerOptionPreview.textContent = "";
+
+    for (const button of buttons) {
+        button.disabled = false;
+    }
+}
 
 // Add event listeners to all buttons
 
@@ -146,13 +172,32 @@ for (const button of buttons) {
 
     else if (button.classList.contains('confirm'))
     {
-        button.addEventListener('click', () => { 
-            makeComputerMove();
-            let winner = determineWinner(playerOption, opponentOption);
-            displayResult(winner);
-        })
+        
     }
 }
+
+confirmButton.addEventListener('click', e => { 
+    makeComputerMove();
+    let winner = determineWinner(playerOption, opponentOption);
+    displayResult(winner);
+    if (playerOption !== undefined)
+    { 
+        for (const button of buttons) {
+            if (button.classList.contains("option"))
+            {
+                button.disabled = true;
+            }
+            e.target.style.display = "none";
+            resetButton.style.display = "block"; 
+        }
+    }
+});
+
+resetButton.addEventListener('click', e => {
+    resetGame();
+    e.target.style.display = "none";
+    confirmButton.style.display = "block";
+});
 
 
 
