@@ -10,23 +10,35 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         html {
             font-size: 30px;
         }
 
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            margin: 0 auto;
-            width: 70%;
+            font-size: 0.8rem;
             font-family: Helvetica, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 70%;
             border: 2px solid black;
             border-radius: 5px;
-            font-size: 0.8rem;
         }
 
         .title {
             text-align: center;
             font-size: 2rem;
-            padding: 0.7em;
+            padding: 0.6em;
             border-bottom: 2px solid gray;
         }
 
@@ -89,6 +101,18 @@
             font-weight: 600;
         }
 
+        .clicked {
+            transform: translateY(5px);
+        }
+
+        .clicked.option {
+            box-shadow: 0 2px gray;
+        }
+
+        .clicked.confirm {
+            box-shadow: 0 2px yellowgreen;
+        }
+
         button:hover {
             cursor: pointer;
             filter: brightness(0.8);
@@ -104,28 +128,53 @@
             filter: none;
         }
 
-        .current-pick {
-            color: rgb(105, 104, 104);
+        .result {
+            color: whitesmoke;
+            padding: 10px;
+            text-align: center;
         }
+
+        .result.error, .result.loss {
+            background-color: red;
+        }
+
+        .result.win {
+            background-color: green;
+        }
+
+        .result.tie {
+            color: black;
+            background-color:lightblue;
+        }
+
     </style>
+    <script defer src="app.js" ?></script>
 </head>
 <body>
-   <h1 class="title">Rock Paper Scissors</h1> 
-   <div class="game-container">
-    <div class="player">
-        <h2>You</h2>
-        <div class="preview"></div>
-        <h3>Pick your move:</h3>
-        <ul class="buttons">
-            <li><button value="rock" class="rock">🪨 Rock</button></li>
-            <li><button value="paper" class="paper">📄 Paper</button></li>
-            <li><button value="scissors" class="scissors">✂️ Scissors</button></li>
-        </ul>
-        <button class="confirm">Confirm pick</button>
-    </div>
-    <div class="opponent">
-        <h2>Opponent</h2>
-    </div>
+   <div class="container">
+       <h1 class="title">Rock Paper Scissors</h1>
+       <div class="game-container">
+        <div class="player">
+            <h2>You</h2>
+            <div class="preview">
+                <p></p>
+            </div>
+            <h3>Pick your move:</h3>
+            <ul class="buttons">
+                <li><button value="rock" class="option rock">🪨 Rock</button></li>
+                <li><button value="paper" class="option paper">📄 Paper</button></li>
+                <li><button value="scissors" class="option scissors">✂️ Scissors</button></li>
+            </ul>
+            <button class="confirm">Confirm pick</button>
+        </div>
+        <div class="opponent">
+            <h2>Opponent</h2>
+            <div class ="preview">
+                <p></p>
+            </div>
+        </div>
+       </div>
+       <p class="result"></p>
    </div>
 </body>
 </html>
