@@ -59,7 +59,7 @@ const getComputerChoice = arr => OPTIONS[Math.floor(Math.random() * arr.length)]
  * Makes a move for the computer opponent and updates the UI.
  * This function is called when the player has made their selection.
  */
-const makeComputerMove = function() {
+const makeComputerMove = () => {
     if (playerOption === undefined)
     {
         return;
@@ -166,7 +166,7 @@ const displayResult = winner => {
 /**
  * Resets the game state and UI to the initial condition.
  */
-const resetGame = function () {
+const resetGame = () => {
     const playerMessage = document.querySelector(".player-message");
     playerOption = undefined;
     opponentOption = undefined;
