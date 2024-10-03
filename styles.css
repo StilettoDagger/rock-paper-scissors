@@ -134,10 +134,16 @@ button.reset {
     display: none;
     background-color: lightblue;
     box-shadow: 0 5px darkblue;
+	align-self: center;
 }
 
 button.confirm:hover {
 	filter: brightness(1.1);
+}
+
+.opponent-message, .player-message {
+    color: gray;
+    font-style: italic;
 }
 
 .result {

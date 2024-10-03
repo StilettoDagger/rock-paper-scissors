@@ -14,30 +14,32 @@
 				<div class="player">
 					<h2>You</h2>
 					<div class="preview">
-						<p></p>
+						<p class="player-message"></p>
 					</div>
-					<h3>Pick your move:</h3>
-					<ul class="buttons">
-						<li><button value="rock" class="option rock">🪨 Rock</button></li>
-						<li>
-							<button value="paper" class="option paper">📄 Paper</button>
-						</li>
-						<li>
-							<button value="scissors" class="option scissors">
-								✂️ Scissors
-							</button>
-						</li>
-					</ul>
+					<div class="options">
+                        <h3>Pick your move:</h3>
+                        <ul class="buttons">
+                            <li><button value="rock" class="option rock">🪨 Rock</button></li>
+                            <li>
+                                <button value="paper" class="option paper">📄 Paper</button>
+                            </li>
+                            <li>
+                                <button value="scissors" class="option scissors">
+                                    ✂️ Scissors
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
 					<button class="confirm">Confirm pick</button>
-                    <button class="reset">Reset</button>
 				</div>
 				<div class="opponent">
 					<h2>Opponent</h2>
 					<div class="preview">
-						<p></p>
+						<p class="opponent-message"></p>
 					</div>
 				</div>
 			</div>
+            <button class="reset">Reset</button>
 			<p class="result"></p>
 		</div>
 	</body>
