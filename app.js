@@ -4,6 +4,9 @@ const OPTIONS = ["rock", "paper", "scissors"];
 let playerOption;
 let opponentOption;
 
+let humanScore = 0;
+let computerScore = 0;
+
 const buttons = document.querySelectorAll("button");
 const playerPreview = document.querySelector(".player .preview");
 const opponentPreview = document.querySelector(".opponent .preview");
@@ -17,7 +20,8 @@ const playerSection = document.querySelector(".player");
 const resetButton = document.querySelector(".reset");
 const confirmButton = document.querySelector(".confirm")
 const optionsDiv = document.querySelector(".options");
-
+const playerScore = document.querySelector(".player-score");
+const opponentScore = document.querySelector(".opponent-score");
 opponentSection.style.display = "none";
 playerOptionPreview.style.fontSize = "2rem";
 opponentOptionPreview.style.fontSize = "4rem";
@@ -27,6 +31,10 @@ opponentPreview.appendChild(opponentOptionPreview);
 
 // Function declarations
 
+/**
+ * Returns the emoji representation of the given option.
+ * option - The option to convert to emoji ("rock", "paper", or "scissors").
+ */
 const getOptionEmoji = option => {
     switch(option)
     {
@@ -41,8 +49,16 @@ const getOptionEmoji = option => {
     }
 }
 
+/**
+ * Randomly selects and returns a choice from the given array.
+ * arr - The array of options to choose from.
+ */
 const getComputerChoice = arr => OPTIONS[Math.floor(Math.random() * arr.length)];
 
+/**
+ * Makes a move for the computer opponent and updates the UI.
+ * This function is called when the player has made their selection.
+ */
 const makeComputerMove = function() {
     if (playerOption === undefined)
     {
@@ -55,58 +71,67 @@ const makeComputerMove = function() {
     opponentSection.style.display = "flex";
 }
 
-const determineWinner = (plOption, opOption) => {
+/**
+ * Determines the winner of the game based on player and opponent choices.
+ * plChoice - The player's choice.
+ * opChoice - The opponent's choice.
+ */
+const determineWinner = (plChoice, opChoice) => {
     
-    if (plOption === undefined)
+    if (plChoice === undefined)
     {
         return;
     }
 
-    if (plOption === opOption)
+    if (plChoice === opChoice)
     {
         return "tie";
     }
 
-    if (plOption === "rock")
+    if (plChoice === "rock")
     {
-        if (opOption === "scissors")
+        if (opChoice === "scissors")
         {
             return "player";
         }
 
-        else if (opOption === "paper")
+        else if (opChoice === "paper")
         {
             return "opponent";
         }
     }
 
-    else if (plOption === "paper")
+    else if (plChoice === "paper")
     {
-        if (opOption === "rock")
+        if (opChoice === "rock")
         {
             return "player";
         }
 
-        else if (opOption === "scissors")
+        else if (opChoice === "scissors")
         {
             return "opponent";
         }
     }
 
-    else if (plOption === "scissors")
+    else if (plChoice === "scissors")
     {
-        if (opOption === "paper")
+        if (opChoice === "paper")
         {
             return "player";
         }
 
-        else if (opOption === "rock")
+        else if (opChoice === "rock")
         {
             return "opponent";
         }
     }
 }
 
+/**
+ * Displays the result of the game in the UI and updates the scores.
+ * winner - The winner of the game ("player", "opponent", "tie", or undefined).
+ */
 const displayResult = winner => {
     result.classList.remove("error", "win", "loss", "tie");
     if (winner === undefined)
@@ -117,12 +142,16 @@ const displayResult = winner => {
 
     else if (winner === "player")
     {
+        humanScore++;
+        playerScore.textContent = `Your score: ${humanScore}`;
         result.classList.add("win");
         result.textContent = `You have won! ${playerOption} beats ${opponentOption}!`;
     }
 
     else if (winner === "opponent")
     {
+        computerScore++;
+        opponentScore.textContent = `Opponent's score: ${computerScore}`;
         result.classList.add("loss");
         result.textContent = `You have lost! ${opponentOption} beats ${playerOption}!`;
     }
@@ -134,6 +163,9 @@ const displayResult = winner => {
     }
 }
 
+/**
+ * Resets the game state and UI to the initial condition.
+ */
 const resetGame = function () {
     playerOption = undefined;
     opponentOption = undefined;

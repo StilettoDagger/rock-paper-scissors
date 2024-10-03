@@ -40,6 +40,14 @@ body {
 	border-bottom: 2px solid gray;
 }
 
+.score-container {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	border-bottom: 2px solid gray;
+	padding: 0.5em;
+}
+
 .game-container {
 	display: flex;
 	justify-content: center;
@@ -176,6 +184,12 @@ button.confirm:hover {
         padding: 0.2em
     }
 
+	.score-container {
+		flex-direction: column;
+		order: -1;
+		gap: 0.5em;
+	}
+
     .game-container {
         flex-direction: column;
     }
@@ -199,7 +213,8 @@ button.confirm:hover {
 }
 
 @media (max-width: 800px) {
-    html {
-        font-size: 22px;
-    }
+
+	.container {
+		width: 90%;
+	}
 }
