@@ -27,10 +27,11 @@ body {
 .container {
 	width: 70%;
 	border: 2px solid black;
-	border-radius: 5px;
+	border-radius: 15px;
     display: flex;
     flex-direction: column;
     background-color: whitesmoke;
+	box-shadow: 0 0 10px 2px rgba(128, 128, 128, 0.508);
 }
 
 .title {
@@ -77,11 +78,11 @@ body {
 	text-decoration: underline;
 }
 
-.player > h2 {
+.player > h2, .player-score {
 	color: green;
 }
 
-.opponent > h2 {
+.opponent > h2, .opponent-score {
 	color: red;
 }
 
@@ -123,7 +124,7 @@ button {
 	box-shadow: 0 2px yellowgreen;
 }
 
-.clicked.reset {
+.clicked.restart {
     box-shadow: 0 2px darkblue;
 }
 
@@ -138,7 +139,7 @@ button.confirm {
 	box-shadow: 0 5px yellowgreen;
 }
 
-button.reset {
+button.restart {
     display: none;
     background-color: lightblue;
     box-shadow: 0 5px darkblue;

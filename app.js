@@ -14,14 +14,14 @@ const playerOptionPreview = document.createElement("p");
 const opponentOptionPreview = document.createElement("p");
 const container = document.querySelector(".container");
 const result = document.querySelector(".result");
-const playerMessage = document.querySelector(".player-message");
 const opponentSection = document.querySelector(".opponent");
 const playerSection = document.querySelector(".player");
-const resetButton = document.querySelector(".reset");
+const restartButton = document.querySelector(".restart");
 const confirmButton = document.querySelector(".confirm")
 const optionsDiv = document.querySelector(".options");
 const playerScore = document.querySelector(".player-score");
 const opponentScore = document.querySelector(".opponent-score");
+
 opponentSection.style.display = "none";
 playerOptionPreview.style.fontSize = "2rem";
 opponentOptionPreview.style.fontSize = "4rem";
@@ -167,6 +167,7 @@ const displayResult = winner => {
  * Resets the game state and UI to the initial condition.
  */
 const resetGame = function () {
+    const playerMessage = document.querySelector(".player-message");
     playerOption = undefined;
     opponentOption = undefined;
     opponentSection.style.display = "none";
@@ -197,12 +198,7 @@ for (const button of buttons) {
             let emojiPreview = getOptionEmoji(playerOption);
             playerOptionPreview.textContent = emojiPreview;
         })
-    }
-
-    else if (button.classList.contains('confirm'))
-    {
-        
-    }
+    } 
 }
 
 confirmButton.addEventListener('click', e => { 
@@ -212,15 +208,16 @@ confirmButton.addEventListener('click', e => {
     displayResult(winner);
     if (playerOption !== undefined)
     { 
+        const playerMessage = document.querySelector(".player-message");
         playerMessage.textContent = "You have selected";
         optionsDiv.style.display = "none";
         confirmButton.style.display = "none";
         playerOptionPreview.style.fontSize = "4rem";
-        resetButton.style.display = "block";
+        restartButton.style.display = "block";
     }
 });
 
-resetButton.addEventListener('click', e => {
+restartButton.addEventListener('click', e => {
     resetGame();
     e.target.style.display = "none";
     confirmButton.style.display = "block";
