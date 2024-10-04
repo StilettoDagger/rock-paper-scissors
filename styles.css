@@ -159,6 +159,7 @@ button.confirm:hover {
 	color: whitesmoke;
 	padding: 10px;
 	text-align: center;
+	border-radius: 0 0 14px 14px;
 }
 
 .result.error,
