@@ -1,9 +1,12 @@
+// TODO: Add end condition (game ends after 5 rounds have been played).
+
 // Global variables declarations
 
 const OPTIONS = ["rock", "paper", "scissors"];
 let playerOption;
 let opponentOption;
 
+let rounds = 1;
 let humanScore = 0;
 let computerScore = 0;
 
@@ -21,6 +24,8 @@ const confirmButton = document.querySelector(".confirm")
 const optionsDiv = document.querySelector(".options");
 const playerScore = document.querySelector(".player-score");
 const opponentScore = document.querySelector(".opponent-score");
+const roundCounter = document.querySelector(".round-counter");
+const finalResult = document.querySelector(".final-result");
 
 opponentSection.style.display = "none";
 playerOptionPreview.style.fontSize = "2rem";
@@ -164,9 +169,11 @@ const displayResult = winner => {
 }
 
 /**
- * Resets the game state and UI to the initial condition.
+ * Resets the game state and UI to the initial condition and start a new round.
  */
-const resetGame = () => {
+const startNewRound = () => {
+    rounds++;
+    roundCounter.textContent = `Round: ${rounds}`;
     const playerMessage = document.querySelector(".player-message");
     playerOption = undefined;
     opponentOption = undefined;
@@ -179,6 +186,33 @@ const resetGame = () => {
     playerMessage.textContent = "";
 }
 
+const resetGame = () => {
+    rounds = 0;
+    humanScore = 0;
+    computerScore = 0;
+    playerScore.textContent = `Your score: ${humanScore}`;
+    opponentScore.textContent = `Opponent's score: ${computerScore}`;
+    roundCounter.textContent = `Round: ${rounds}`;
+    restartButton.value = "new-round";
+    restartButton.textContent = "Next round"
+    playerSection.style.display = "flex";
+    finalResult.style.display = "none";
+}
+
+const showFinalResult = (plScore, opScore) => {
+    playerSection.style.display = "none";
+    opponentSection.style.display = "none";
+    result.classList.remove("error", "win", "loss", "tie");
+    result.textContent = "";
+    finalResult.style.display = "flex";
+    let resultText;
+
+    resultText = plScore > opScore ? "Congratulations! You have won against the computer!":
+        opScore > plScore ? "You have lost against the computer. How embarrassing...":
+        "Looks like you tied with the computer. Try playing again.";
+
+    finalResult.textContent = resultText;
+}
 // Add event listeners to all buttons
 
 for (const button of buttons) {
@@ -218,7 +252,17 @@ confirmButton.addEventListener('click', e => {
 });
 
 restartButton.addEventListener('click', e => {
-    resetGame();
+    if (e.target.value === "reset")
+    {
+        resetGame();
+    }
+    if (rounds >= 5){
+        showFinalResult(humanScore, computerScore); 
+        e.target.value = "reset";
+        e.target.textContent = "Restart"
+        return;
+    }
+    startNewRound();
     e.target.style.display = "none";
     confirmButton.style.display = "block";
 });

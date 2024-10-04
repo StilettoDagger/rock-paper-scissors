@@ -36,9 +36,16 @@ body {
 
 .title {
 	text-align: center;
-	font-size: 2rem;
+	font-size: 1rem;
 	padding: 0.6em;
 	border-bottom: 2px solid gray;
+}
+
+.round-counter {
+	color: gray;
+	font-size: 0.8em;
+	align-self: center;
+	margin-top: 1em;
 }
 
 .score-container {
@@ -192,6 +199,16 @@ button.confirm:hover {
 	content: "🟰 "
 }
 
+.final-result {
+	display: none;
+	justify-content: center;
+	align-items: center;
+	color: gray;
+	font-style: italic;
+	font-size: 3em;
+	padding: 1em;
+}
+
 
 @media (max-width: 1000px) {
     html {
@@ -235,5 +252,13 @@ button.confirm:hover {
 
 	.container {
 		width: 90%;
+	}
+
+	.final-result {
+		font-size: 2em;
+	}
+
+	.title {
+		padding: 0.2em;
 	}
 }
