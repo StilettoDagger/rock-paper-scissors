@@ -223,5 +223,12 @@ restartButton.addEventListener('click', e => {
     confirmButton.style.display = "block";
 });
 
+// Fix bug where buttons stay depressed when the mouse click is released away from the button
+
+window.addEventListener("mouseup", () => {
+    for (const button of buttons) {
+        button.classList.remove("clicked");
+    }
+})
 
 
