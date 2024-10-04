@@ -171,7 +171,7 @@ button.confirm:hover {
 }
 
 .result.error::before {
-	content: "❎";
+	content: "❎ ";
 }
 
 .result.win {
@@ -179,12 +179,16 @@ button.confirm:hover {
 }
 
 .result.win::before {
-	content: "🏆️"
+	content: "🏆️ "
 }
 
 .result.tie {
 	color: black;
 	background-color: lightblue;
+}
+
+.result.tie::before {
+	content: "🟰 "
 }
 
 
