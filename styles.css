@@ -166,8 +166,20 @@ button.confirm:hover {
 	background-color: red;
 }
 
+.result.loss::before {
+	content: "💀 ";
+}
+
+.result.error::before {
+	content: "❎";
+}
+
 .result.win {
 	background-color: green;
+}
+
+.result.win::before {
+	content: "🏆️"
 }
 
 .result.tie {
