@@ -1,5 +1,3 @@
-// TODO: Add end condition (game ends after 5 rounds have been played).
-
 // Global variables declarations
 
 const OPTIONS = ["rock", "paper", "scissors"];
@@ -186,6 +184,11 @@ const startNewRound = () => {
     playerMessage.textContent = "";
 }
 
+
+/**
+ * Resets the game state to its initial values.
+ * This function resets the round counter, human score, and computer score to zero.
+ */
 const resetGame = () => {
     rounds = 0;
     humanScore = 0;
@@ -199,6 +202,13 @@ const resetGame = () => {
     finalResult.style.display = "none";
 }
 
+/**
+ * Displays the final result of the game by hiding the player and opponent sections,
+ * clearing previous result messages, and showing the final result message based on the scores.
+ *
+ * plScore - The player's score.
+ * opScore - The opponent's (computer's) score.
+ */
 const showFinalResult = (plScore, opScore) => {
     playerSection.style.display = "none";
     opponentSection.style.display = "none";
