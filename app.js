@@ -266,7 +266,7 @@ restartButton.addEventListener('click', e => {
     {
         resetGame();
     }
-    if (rounds >= 5){
+    if (humanScore === 5 || computerScore === 5){
         showFinalResult(humanScore, computerScore); 
         e.target.value = "reset";
         e.target.textContent = "Restart"
