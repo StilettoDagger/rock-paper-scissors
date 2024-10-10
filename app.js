@@ -164,6 +164,13 @@ const displayResult = winner => {
         result.classList.add("tie");
         result.textContent = `It's a tie! Both of you have selected ${playerOption}`;
     }
+
+    if (humanScore === 5 || computerScore === 5)
+    {
+        restartButton.textContent = "Game Over!";
+        restartButton.removeEventListener("click", handleNewRound);
+        restartButton.addEventListener("click", handleFinalResults, {once: true});
+    }
 }
 
 /**
@@ -196,7 +203,6 @@ const resetGame = () => {
     playerScore.textContent = `Your score: ${humanScore}`;
     opponentScore.textContent = `Opponent's score: ${computerScore}`;
     roundCounter.textContent = `Round: ${rounds}`;
-    restartButton.value = "new-round";
     restartButton.textContent = "Next round"
     playerSection.style.display = "flex";
     finalResult.style.display = "none";
@@ -223,21 +229,44 @@ const showFinalResult = (plScore, opScore) => {
 
     finalResult.textContent = resultText;
 }
+
+// Event handler functions
+
+const handleNewRound = e => {
+    startNewRound();
+    e.target.style.display = "none";
+    confirmButton.style.display = "block";
+}
+
+const handleResetGame = e => {
+    resetGame();
+    startNewRound();
+    e.target.style.display = "none";
+    e.target.addEventListener("click", handleNewRound);
+    confirmButton.style.display = "block";
+}
+
+const handleFinalResults = e => {
+    showFinalResult(humanScore, computerScore); 
+    e.target.textContent = "Restart";
+    e.target.addEventListener("click", handleResetGame, {once: true});
+}
+
 // Add event listeners to all buttons
 
 for (const button of buttons) {
 
-    button.addEventListener('mousedown', e => {
-        e.target.classList.add('clicked');
+    button.addEventListener("mousedown", e => {
+        e.target.classList.add("clicked");
     });
 
-    button.addEventListener('mouseup', e => {
-        e.target.classList.remove('clicked');
+    button.addEventListener("mouseup", e => {
+        e.target.classList.remove("clicked");
     });
 
-    if (button.classList.contains('option'))
+    if (button.classList.contains("option"))
     {
-        button.addEventListener('click', e => {
+        button.addEventListener("click", e => {
             playerOption = e.target.value;
             let emojiPreview = getOptionEmoji(playerOption);
             playerOptionPreview.textContent = emojiPreview;
@@ -245,7 +274,7 @@ for (const button of buttons) {
     } 
 }
 
-confirmButton.addEventListener('click', e => { 
+confirmButton.addEventListener("click", e => { 
     makeComputerMove();
 
     let winner = determineWinner(playerOption, opponentOption);
@@ -261,21 +290,7 @@ confirmButton.addEventListener('click', e => {
     }
 });
 
-restartButton.addEventListener('click', e => {
-    if (e.target.value === "reset")
-    {
-        resetGame();
-    }
-    if (humanScore === 5 || computerScore === 5){
-        showFinalResult(humanScore, computerScore); 
-        e.target.value = "reset";
-        e.target.textContent = "Restart"
-        return;
-    }
-    startNewRound();
-    e.target.style.display = "none";
-    confirmButton.style.display = "block";
-});
+restartButton.addEventListener("click", handleNewRound);
 
 // Fix bug where buttons stay depressed when the mouse click is released away from the button
 
